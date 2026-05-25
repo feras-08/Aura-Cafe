@@ -30,6 +30,15 @@ a {
   background: rgba(10, 10, 10, 0.75);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(200, 169, 107, 0.12);
+
+  transition: 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(22px);
+  border-bottom: 1px solid rgba(200, 169, 107, 0.2);
+  padding: 14px 8%;
 }
 
 .logo {
@@ -166,4 +175,98 @@ a {
 .hero-card span {
   color: #9a9a9a;
   line-height: 1.8;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-section {
+  padding: 120px 8%;
+  background: #0a0a0a;
+}
+
+.section-header {
+  max-width: 720px;
+  margin-bottom: 55px;
+}
+
+.section-tag {
+  color: #c8a96b;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.section-header h2 {
+  font-size: 52px;
+  line-height: 1.25;
+  margin-bottom: 18px;
+}
+
+.section-header p {
+  color: #9a9a9a;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.menu-card {
+  padding: 36px;
+  border-radius: 28px;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(200, 169, 107, 0.12);
+  transition: 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: rgba(200, 169, 107, 0.08);
+  border-radius: 50%;
+  top: -60px;
+  left: -60px;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(200, 169, 107, 0.35);
+}
+
+.menu-card span {
+  color: #c8a96b;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.menu-card h3 {
+  font-size: 30px;
+  margin: 22px 0 14px;
+}
+
+.menu-card p {
+  color: #9a9a9a;
+  line-height: 1.8;
+  margin-bottom: 26px;
+}
+
+.menu-card strong {
+  color: #e8e1d9;
+  font-size: 22px;
 }
