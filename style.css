@@ -745,7 +745,7 @@ a {
   height: 3px;
   width: 0%;
   background: linear-gradient(90deg, #c8a96b, #e8e1d9);
-  z-index: 2000;
+  z-index: 20000;
   transition: width 0.1s linear;
 }
 
