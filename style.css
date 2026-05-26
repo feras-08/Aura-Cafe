@@ -8,6 +8,7 @@ body {
   font-family: "IBM Plex Sans Arabic", sans-serif;
   background-color: #0a0a0a;
   color: #e8e1d9;
+  overflow-x: hidden;
 }
 
 html {
@@ -82,22 +83,19 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  transform: translateX(-100%);
+  transform: translateX(100%);
   opacity: 0;
-
   width: 360px;
   height: 100vh;
   background: rgba(8, 8, 8, 0.96);
   backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(200, 169, 107, 0.16);
+  border-left: 1px solid rgba(200, 169, 107, 0.16);
   padding: 120px 40px;
-
   display: flex;
   flex-direction: column;
   gap: 28px;
-
   transition: 0.6s ease;
-  z-index: 1050;
+  z-index: 10001;
 }
 
 .mobile-menu.active {
@@ -731,26 +729,217 @@ a {
     height: 44px;
   }
 
-  .mobile-menu {
-    width: 100%;
-    left: -100%;
-    padding: 120px 32px;
-    align-items: flex-start;
-  }
-
-  .mobile-menu.active {
-    left: 0;
-  }
-
-  .mobile-menu a {
-    font-size: 24px;
-  }
-
   .hero {
     padding: 140px 6% 70px;
   }
 
   .hero h1 {
     font-size: 40px;
+  }
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #c8a96b, #e8e1d9);
+  z-index: 2000;
+  transition: width 0.1s linear;
+}
+
+.glow {
+  position: fixed;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: rgba(200, 169, 107, 0.16);
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+  animation: floatGlow 8s ease-in-out infinite alternate;
+}
+
+.glow-one {
+  top: 18%;
+  right: 8%;
+}
+
+.glow-two {
+  bottom: 12%;
+  left: 6%;
+  animation-delay: 2s;
+}
+
+@keyframes floatGlow {
+  from {
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    transform: translateY(-50px) scale(1.14);
+  }
+}
+
+.hero,
+.menu-section,
+.about-section,
+.gallery-section,
+.cta-section,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+.menu-toggle {
+  z-index: 10000;
+}
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
+}
+
+.loader h1 {
+  font-size: 48px;
+  color: #e8e1d9;
+  letter-spacing: 1px;
+  animation: loaderPulse 1.6s ease-in-out infinite alternate;
+}
+
+.loader h1 span {
+  color: #c8a96b;
+}
+
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes loaderPulse {
+  from {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.menu-toggle {
+  position: relative !important;
+  z-index: 10002 !important;
+}
+
+.navbar {
+  z-index: 10000 !important;
+}
+
+.menu-toggle {
+  position: relative !important;
+  z-index: 10002 !important;
+}
+
+body.menu-open .mobile-menu {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.menu-toggle {
+  position: relative;
+  z-index: 10002;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 360px;
+  height: 100vh;
+  padding: 120px 40px;
+
+  background: rgba(8, 8, 8, 0.96);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(200, 169, 107, 0.16);
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  z-index: 10001;
+  transition: 0.7s ease;
+}
+
+body.menu-open .mobile-menu {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-size: 26px;
+  font-weight: 700;
+  color: #e8e1d9;
+  opacity: 0;
+  transform: translateX(-25px);
+  transition: 0.6s ease;
+}
+
+body.menu-open .mobile-menu a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+body.menu-open .mobile-menu a:nth-child(1) {
+  transition-delay: 0.1s;
+}
+body.menu-open .mobile-menu a:nth-child(2) {
+  transition-delay: 0.18s;
+}
+body.menu-open .mobile-menu a:nth-child(3) {
+  transition-delay: 0.26s;
+}
+body.menu-open .mobile-menu a:nth-child(4) {
+  transition-delay: 0.34s;
+}
+body.menu-open .mobile-menu a:nth-child(5) {
+  transition-delay: 0.42s;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a.active-link {
+  color: #c8a96b;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu {
+    width: 100%;
+    padding: 120px 32px;
+  }
+
+  .mobile-menu a {
+    font-size: 24px;
   }
 }

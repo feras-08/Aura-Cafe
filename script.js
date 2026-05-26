@@ -28,13 +28,57 @@ const menuToggle = document.getElementById("menuToggle");
 const mobileMenu = document.getElementById("mobileMenu");
 
 menuToggle.addEventListener("click", () => {
+  document.body.classList.toggle("menu-open");
   menuToggle.classList.toggle("active");
-  mobileMenu.classList.toggle("active");
 });
 
 document.querySelectorAll(".mobile-menu a").forEach((link) => {
   link.addEventListener("click", () => {
+    document.body.classList.remove("menu-open");
     menuToggle.classList.remove("active");
-    mobileMenu.classList.remove("active");
   });
+});
+const scrollProgress = document.querySelector(".scroll-progress");
+
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+
+  scrollProgress.style.width = scrollPercent + "%";
+});
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".mobile-menu a");
+
+window.addEventListener("scroll", () => {
+  let currentSection = "";
+
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 160;
+    const sectionHeight = section.offsetHeight;
+
+    if (
+      window.scrollY >= sectionTop &&
+      window.scrollY < sectionTop + sectionHeight
+    ) {
+      currentSection = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach((link) => {
+    link.classList.remove("active-link");
+
+    if (link.dataset.section === currentSection) {
+      link.classList.add("active-link");
+    }
+  });
+});
+
+const loader = document.getElementById("loader");
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    loader.classList.add("hidden");
+  }, 900);
 });
